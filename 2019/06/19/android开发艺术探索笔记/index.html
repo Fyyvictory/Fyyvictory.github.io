@@ -1,0 +1,1446 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/avatar.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/avatar.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/avatar.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="技术笔记,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="taskaffinity,任务相关性，这个参数标识了一个activity所需要的任务栈的名字，默认情况下，所有activity所属的任务栈的名字为应用的包名。如果为每一个activity单独制定taskaffinity属性，这个属性不能和包名一直，否则相当于没有指定。taskaffinity属性主要是和singleTask启动模式或allowTaskReparenting属性配对使用，在其他情况">
+<meta name="keywords" content="技术笔记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="android开发艺术探索笔记">
+<meta property="og:url" content="http://yoursite.com/2019/06/19/android开发艺术探索笔记/index.html">
+<meta property="og:site_name" content="yang的blog">
+<meta property="og:description" content="taskaffinity,任务相关性，这个参数标识了一个activity所需要的任务栈的名字，默认情况下，所有activity所属的任务栈的名字为应用的包名。如果为每一个activity单独制定taskaffinity属性，这个属性不能和包名一直，否则相当于没有指定。taskaffinity属性主要是和singleTask启动模式或allowTaskReparenting属性配对使用，在其他情况">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-07-12T09:21:53.937Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="android开发艺术探索笔记">
+<meta name="twitter:description" content="taskaffinity,任务相关性，这个参数标识了一个activity所需要的任务栈的名字，默认情况下，所有activity所属的任务栈的名字为应用的包名。如果为每一个activity单独制定taskaffinity属性，这个属性不能和包名一直，否则相当于没有指定。taskaffinity属性主要是和singleTask启动模式或allowTaskReparenting属性配对使用，在其他情况">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/06/19/android开发艺术探索笔记/">
+
+
+
+
+
+  <title>android开发艺术探索笔记 | yang的blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">yang的blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/19/android开发艺术探索笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="yang">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="yang的blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">android开发艺术探索笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-06-19T15:17:34+08:00">
+                2019-06-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/06/19/android开发艺术探索笔记/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/06/19/android开发艺术探索笔记/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/06/19/android开发艺术探索笔记/" class="leancloud_visitors" data-flag-title="android开发艺术探索笔记">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  5.1k
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  18
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <ul>
+<li><p>taskaffinity,任务相关性，这个参数标识了一个activity所需要的任务栈的名字，默认情况下，所有activity所属的任务栈的名字为应用的包名。如果为每一个activity单独制定taskaffinity属性，这个属性不能和包名一直，否则相当于没有指定。taskaffinity属性主要是和singleTask启动模式或allowTaskReparenting属性配对使用，在其他情况下没有意义。另外，任务栈分为前台任务栈和后台任务栈，后台任务栈中的activity位于暂停状态，用户可以通过切换将后台任务栈再次调到前台。</p>
+</li>
+<li><p>当taskAffinity和singleTask启动模式配对使用的时候，他是具有该模式的activity的目前任务栈的名字，待启动的activity会运行在名字和taskAffinity相同的任务栈中。</p>
+</li>
+<li><p>当taskAffinity和allowTaskReparenting结合时，eg： 有两个应用a,b，b的一个activity名为x,x的allowTaskReparenting属性为true的话，那么当应用a启动应用x的时候，然后按home键回到桌面，然后再单击b的桌面图标，这时启动的并不是b的主activity，而是重新显示了已经被应用A启动的activity x，或者说x从a的任务栈中转移到了b的任务栈中</p>
+</li>
+<li><p>IPC，进程间通信，或者称为跨进程通信，指的是两个进程间进行数据交换的过程。Android中最有特色的进程间通信方式就是Binder。其次，通过socket也可以实现任意两个终端之间的通信。</p>
+</li>
+<li><p>一个应用内开启多进程的方式是设定Androidmanifest.xml中的process属性，其中process属性的值以”:“开头的属于当前应用的私有进程，其它应用的组件不可以和它跑在同一个进程中，而process的值不以”:“开头的进程属于全局进程，其他应用通过shareUID方式可以和它跑在同一个进程中。</p>
+</li>
+<li><p>一般来说，使用多进程会造成以下几个方面的问题：</p>
+<ul>
+<li>静态成员和单例模式完全失效。</li>
+<li>线程同步机制完全失效。</li>
+<li>sharedPreferences的可靠性下降。</li>
+<li>Application会多次创建。</li>
+</ul>
+</li>
+<li><p>四大组件中三大组件（activity，service，receiver）都是支持在intent中传递bundle数据的，由于bundle实现了parcelable接口，所以他可以方便的在不同进程间传输</p>
+</li>
+<li><p>使用文件共享。文件共享也是一种不错的进程间通信方式，两个进程通过读/写同一个文件来交换数据。然而可能存在的问题是两个线程并发读写同一个文件的时候。</p>
+</li>
+<li><p>tips：反序列化得到的对象只是在内容上和序列化之前的对象一样，但本质上还是两个对象。</p>
+</li>
+<li><p>Tips2：sharePreferences底层实现上是采用XML文件来存储的键值对，本质上也属于文件的一种，但由于系统对它的读写有一定的缓存策略，即内存中会存在一份sharepreferences文件的缓存，因此，在多进程模式下，系统对它的读写变得不可靠，当面对高并发的读写访问时，sharePreferences有很大的几率会丢失数据，因此，不建议在进程间通信使用sharePreferences。</p>
+</li>
+<li><p>使用messenger。messenger是一种轻量级的IPC方案，她的底层实现是AIDL。在进程间通信的时候，Android 2.2以前message的object字段不支持跨进程传输，2.2以后message的object字段也仅支持系统提供的实现parcelable接口的对象才能通过它来传输，这意味着我们自定义的parcelable对象是无法通过object字段来传输的。不过我们还是可以使用bundle来传输大量的数据类型。</p>
+</li>
+<li><p>使用AIDL。使用messenger来进行进程间通信的方法时，messenger是以串行的方式处理客户端发来的信息，如果大量的信息同时发送到服务端，服务端仍然只能一个一个处理，如果有大量的并发请求，那么使用messenger就不太合适了。同时，messenger的作用主要是为了传递信息，很多时候可能需要跨进程调用服务端的方法，这种情形messenger就无法做到了。这种情况下的跨进程操作就可以使用AIDL来实现。</p>
+</li>
+<li><p>remoteCallbackList 是系统专门提供的用于删除跨进程listener的接口。CallbackList是一个泛型，支持管理任意的AIDL接口。它的工作原理是其内部有一个Map结构专门用来保存所有AIDL的回调，这个Map的key是Ibinder类型，value是Callback类型。</p>
+</li>
+<li><p>为了程序的健壮性，我们还需要做一件事，Binder可能会意外死亡，这往往是因为服务端进程意外停止了，这时我们需要重新连接服务。有两种方法，第一种是给Binder设置DeathRecipient监听，当Binder死亡时，我们可以收到BinderDied方法回调，在binderDied方法中我们可以重连远程服务。另一种方法是在onServiceDisconnected中重连远程服务。两者区别在于onServiceDisconnected是在客户端的UI线程中会掉的，而binderDied在客户端的Binder线程池中被回调，也就是说binderDied中不能访问UI。</p>
+</li>
+<li><p>使用ContentProvider。ContentProvider是Android中提供的专门用于不同应用间进行数据共享的方式。ContentProvider的底层实现同样是Binder。ContentProvider主要以表格的形式来组织数据，并且可以包含多个表。此外，ContentProvider还支持文件数据。但是需要关注多线程访问的同步问题。</p>
+</li>
+<li><p>MotionEvent，即手指接触屏幕之后发生的一系列的事件，常见的包括ACTION_DOWN，ACTION_UP，ACTION_MOVE，正常情况下，一次手指触摸屏幕的行为会触发一系列点击事件。此外系统还为我们提供了两组方法：getX/getY和getRowX和getRowY。他们的区别在于前者是返回相对于当前View左上角的x和y坐标，而后者是返回的相对于手机屏幕左上角的x和y坐标。</p>
+</li>
+<li><p>TouchSlop是系统所能识别出的被认为是滑动的最小距离，这是一个常量，如果手指在屏幕上滑动的距离小于这个常量，那么系统就不认为该操作是滑动行为。ViewConfiguration.get(getContext()).getScaledTouchSlop()可以获取到该常量。</p>
+</li>
+<li><p>VelocityTracker，速度追踪。用于追踪手指在滑动过程中的速度，包括水平和竖直方向的速度。其使用方式如下：</p>
+<ul>
+<li>在View的onTouchEvent方法中追踪当前点击事件的速度</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">VelocityTricker velocityTracker = VelocityTracker.obtain;</span><br><span class="line"><span class="comment">//把MotionEvent对象传进去</span></span><br><span class="line">velocityTracker.addMovement(event);</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>然后采用以下方式获取当前速度。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">velocityTricker.computeCurrentVelocity(<span class="number">1000</span>);</span><br><span class="line"><span class="keyword">int</span> x = velocityTracker.getXVelocity();</span><br><span class="line"><span class="keyword">int</span> y = velocityTracker.getYVelocity();</span><br></pre></td></tr></table></figure>
+<p>Ps:注意，第一，获取速度之前必须先计算速度，即在使用getXVelocity和getYVelocity这两个方法之前必须先调用computeCurrentVelocity方法。第二，这里的速度所指的是一段时间内手指所划过的像素数。第三，速度可以是负数，因为速度的方向如果是从右往左或者从下向上，速度即为负值。</p>
+</li>
+<li><p>最后，当不需要使用的时候，需要调用clear方法来重置并回收内存。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">velocityTracker.clear();</span><br><span class="line">velocityTracker.recycle();</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>GestureDetector,手势检测，用于辅助监测用户的单击、滑动、长按、双击等行为。使用过程如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Gesturedetector detector = <span class="keyword">new</span> GestureDetector(<span class="keyword">this</span>);</span><br><span class="line"><span class="comment">//解决长按屏幕后无法拖动的现象</span></span><br><span class="line">detector.setIsLongpressEnable(<span class="keyword">false</span>);</span><br><span class="line"><span class="comment">//接管目标View的onTouchEvent方法，在待监听View的onTouchEvent方法中添加如下实现：</span></span><br><span class="line"><span class="keyword">boolean</span> consume = detector.onTouchEvent(event);</span><br><span class="line"><span class="keyword">return</span> consume;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>做完这两步，可以有选择的实现OnGestureListener和OnDoubleTapListener中的方法。</li>
+<li>建议：如果只是监听滑动，可以使用onTouchEvent中实现，如果要监听双击这种行为的话，使用GestureDetector会更加方便。</li>
+</ul>
+</li>
+<li><p>Scroller ，弹性滑动对象，用于实现View的弹性滑动。当使用View的scrollto/scrollby进行的滑动是一瞬间完成的，使用scroller可以实现过渡效果的滑动。使用中，Scroller需要与computeScroll方法配合使用太能共同完成这个功能。使用也是固定范式，如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Scroller scroller = <span class="keyword">new</span> Scroller(context);</span><br><span class="line"><span class="comment">// 缓慢滚到指定位置</span></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">smoothScrollTo</span><span class="params">(<span class="keyword">int</span> desX,<span class="keyword">int</span> dexY)</span></span>&#123;</span><br><span class="line">  <span class="keyword">int</span> scrollX = getScrollX();</span><br><span class="line">  <span class="keyword">int</span> delta = desX - scrollX;</span><br><span class="line">  scroller.startScroll(scrollX,<span class="number">0</span>,delta,<span class="number">0</span>,<span class="number">1000</span>)；</span><br><span class="line">    invalidate();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">computeScroll</span><span class="params">()</span></span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(scroller.computeScrollOffset())&#123;</span><br><span class="line">    	scrollTo(scroller.getCurrX(),scroller.getCurrY());</span><br><span class="line">    postInvalidate();</span><br><span class="line">  &#125;	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>view 的滑动实现有三种方式：</p>
+<ul>
+<li><p>通过view本身提供的scrollTo/scrollBy方法来实现滑动。这两个方法只能改变view内容的位置而不能改变View在布局中的位置。</p>
+</li>
+<li><p>使用动画，通过动画让一个view平移。主要操作View的translationX和translationY属性。需要注意的是view只能改变view视觉上的位置，但是并不能真正的改变view的位置参数。属性动画解决了这一问题，属性动画使用如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ObjectAnimation.ofFloat(targetView,<span class="string">"translationX"</span>,<span class="number">0</span>,<span class="number">100</span>).setDuration(<span class="number">100</span>).start();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>改变布局参数。即改变LayoutParams。通过改变LayoutParams的方式去实现View的滑动同样是一种很灵活的方式，需要根据不同的情况去做不同的处理。</p>
+</li>
+</ul>
+</li>
+<li><p>点击事件的传递，请看下方伪代码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">dispatchTouchEvent</span><span class="params">(MotionEvent ev)</span></span>&#123;</span><br><span class="line">  <span class="keyword">boolean</span> consume = <span class="keyword">false</span>;</span><br><span class="line">  <span class="keyword">if</span>(onInterceptTouchEvent(ev))&#123;</span><br><span class="line">    consume = onTouchEvent(ev);</span><br><span class="line">  &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    consume = child.dispatchTouchEvent(ev);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> consume;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>当一个View需要处理事件时，如果它设置了OnTouchListener，那么OnTouchListener中的onTouch方法会被回调。这个事件如何处理还要看OnTouch的返回值，如果返回false，则当前View的onTouchEvent方法会被调用，如果返回true，那么onTouchEvent方法将不会被调用。由此可见，给View设置的OnTouchListener，其优先级比onTouchEvent要高。在onTouchEvent方法中，如果当前设置的有OnClickListener，那么onclick方法会被调用，由此可见，我们常用的OnClickListener优先级最低，即处于事件传递的尾端。</p>
+</li>
+<li><p>当一个点击事件产生后，传递过程如下：activity —&gt;window—&gt;View。正常情况下，一个事件序列只能被一个View拦截且消耗，因为一旦一个元素拦截了某次时间，那么同一个事件序列内的所有事件都会直接交给它处理，因此它的onInterceptTouchEvent不会再被调用。</p>
+</li>
+<li><p>某个View一旦开始处理事件，如果它不消耗ACTION_DOWN事件，那么同一系列的其他事件也不会再交给它来处理，并且事件将重新交由它的父元素来处理。</p>
+</li>
+<li><p>Viewgroup默认不拦截任何事件。</p>
+</li>
+<li><p>View没有onInterceptTouchEvent方法，一旦有点击事件传递给它，那么它的onTouchEvent方法就会调用。view的longClickable属性默认都是false。</p>
+</li>
+<li><p>View的enable属性不影响onTouchEvent的默认返回值，即便一个view是disable状态的，只要它的clickable或者longClickable有一个为true，那么它的onTouchEvent就返回true。</p>
+</li>
+<li><p>通过requestDisallowInterceptTouchEvent方法可以在子元素中干预父元素的事件分发过程，但是ACTION_DOWN事件除外。</p>
+</li>
+<li><p>一个view（viewgroup除外），不可用状态下依旧会消耗掉点击事件。</p>
+</li>
+<li><p>setonclicklistener和setlongclicklistener会自动将view的clickable和longclickable</p>
+</li>
+<li><p>系统可能需要多次measure才能确定最终的测量宽高，在这种情形下，在onMeasure方法中拿到的测量宽高可能不准确，可以在onLayout方法中获取View的测量宽高或最终宽高。</p>
+</li>
+<li><p>在activity中获取view的宽高准确时机在于：</p>
+<ul>
+<li><p>onWindowFocusChanged。该方法的含义是：view已经初始化完毕，宽高准备好了，然而需要注意的是，当activity的窗口失去焦点和得到焦点都会调用该方法，所以，如果频繁的调用onresume和onpause，那么onWIndowForcusChanged也会频繁调用。</p>
+</li>
+<li><p>view.post(runnable)。通过post可以将一个runnable投递到消息队列的尾部，然后等待Looper调用这个runnable的时候，view也已经初始化好了。</p>
+</li>
+<li><p>ViewTreeObserver。使用ViewTreeObserver的众多回调可以完成这个功能，比如OnGlobalLayoutListener这个接口，是当View树的状态发生改变或view树内部的view的可见性变化时，onGlobalLayout方法将被回调。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ViewTreeObserver observer = view.getViewTreeObserver();</span><br><span class="line">observer.addOnGlobalLayoutListener(<span class="keyword">new</span> OnGlobalLayoutListener()&#123;</span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onGlobalLayout</span><span class="params">()</span></span>&#123;</span><br><span class="line">    view.getViewTreeObserver().removeGlobalOnLayoutListener(<span class="keyword">this</span>);</span><br><span class="line">    <span class="keyword">int</span> width = view.getMeasuredWidth();</span><br><span class="line">    <span class="keyword">int</span> height = view.getMeasuredHeight();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>View.measure(int widthMeasureSpec,int heightMeasureSPec)。通过手动对view进行measure来得到view的宽高，这种方法比较复杂，需要根据view的layoutParams来分。</p>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code>- match_parent。直接放弃，无法measure出具体宽高。
+</code></pre><ul>
+<li><p>具体数字（dp/px）。</p>
+</li>
+<li><p>wrap_content，AT_MOST计算。</p>
+</li>
+</ul>
+<ul>
+<li><p>Layout的作用是ViewGroup用来确定子元素的位置。</p>
+</li>
+<li><p>自定义view须知：</p>
+</li>
+</ul>
+<ul>
+<li>让view支持wrap_content</li>
+<li>如果有必要，让view支持padding</li>
+<li>尽量不要在view中使用handler。因为view内部本身提供了post系列方法，完全可以替代handler的作用。</li>
+<li>view中如果有线程或者动画，需要及时停止。参考onDetachedFromWindow。与该方法相对的是onAttachedToWindow。如果不及时处理，可能造成内存泄漏。</li>
+</ul>
+<ul>
+<li><p>view带有滑动嵌套的时候，需要处理好滑动冲突。</p>
+</li>
+<li><p>remoteview在实际开发中，主要用于通知栏和桌面小部件的开发过程。remoteview是运行在systemServer进程中，为了跨进程更新页面，RemoteView提供一系列的set方法。</p>
+</li>
+<li><p>APPWidgetProvider是Android中提供的用于实现桌面小部件的类，其本质是一个广播。所以使用的时候需要在Manifest文件中声明注册。</p>
+</li>
+<li><p>PendingIntent支持三种待定意图：启动activity，启动service和发送广播</p>
+</li>
+<li><p>Drawable有很多种。</p>
+<ul>
+<li><p>LayerDrawable。LayerDrawable对应的XML标签是</p>
+<p><layer-list>,它表示一种层次化的Drawable集合，通过将不同的Drawable放置在不同的层上面从而达到一种叠加后的效果。</layer-list></p>
+</li>
+<li><p>StateListDrawable对应于<selector>标签，每个Drawable都对应view的一种状态。</selector></p>
+</li>
+<li><p>LevelListDrawable。对应于<level-list>标签，它也表示一个Drawable集合，集合中的每个Drawable都有一个等级（level）的概念。根据不同的等级，LevelListDrawable会切换为对应的Drawable。</level-list></p>
+</li>
+<li><p>transitionDrawable对应于<transition>标签，用于实现Drawable之间的淡入和淡出效果。</transition></p>
+</li>
+<li><p>InsertDrawable对应于<insert>标签，可以把其它Drawable内嵌到自己当中。</insert></p>
+</li>
+<li><p>ScaleDrawable对应于scale标签，他可以根据自己的等级将指定的Drawable缩放到一定比例。</p>
+</li>
+<li><p>ClipDrawable，对应于<clip>标签，他可以根据自己当前的等级来裁剪另一个Drawable，裁剪方向可以通过android:clipOrientation和android:gravity这两个属性来共同控制。</clip></p>
+</li>
+</ul>
+</li>
+<li><p>interpolator，表示动画集合所采用的差值器，差值器影响动画的速度，该属性的默认值是加速减速差值器。</p>
+</li>
+<li><p>shareInterpolator，表示集合中的动画是否和集合共享同一个差值器。</p>
+</li>
+<li><p>自定义动画是一件既简单又复杂的事情。派生一种新的动画只需要继承Animation这个抽象类，然后重写它的initialize和applyTransformation方法。在initialize方法中做一下初始化工作，在applyTransformation中进行相应的矩阵变换即可。</p>
+</li>
+<li><p>activity的切换效果，主要用到overridePendingTransition(int enterAnim,int exitAnim)这个方法。overridePendingTransition这个方法必须用于startActivity或者finish的后面，否则动画效果不起作用。</p>
+</li>
+<li><p>fragment也可以添加切换动画，由于fragment是API11的新引入的类，因此为了兼容性，我们需要使用support-v4这个兼容包，这种情况下，可以通过fragmentTransaction中的setCustomAnimation（）方法来添加切换动画。PS：<em>切换动画需要是View动画，之所以不适用属性动画，是因为属性动画也是API11引入的</em></p>
+</li>
+<li><p>属性动画可以对任意对象的属性进行动画，而不仅仅是View，动画默认时间间隔是300ms，默认帧率10ms/帧。其达到的效果是：在一个时间间隔内完成对象从一个属性值到另一个属性值的改变。属性动画是从API11才引入的。</p>
+</li>
+<li><p>插值器。TimeInterpolator，时间插值器，它的作用是根据时间流逝的百分比来计算出当前属性值改变的百分比，系统预设的有LInearInterpolator(匀速)，AccelerateDecelerateInterpolator(加速减速)和DecelerateInterpolator（减速）等。TypeEvaluator，类型估值算法，也叫估值器，它的作用是根据当前属性改变的百分比计算改变后的属性值。系统预设的有IntEvaluator，FloatEvaluator和ArgbEvaluator。插值器和估值器也可以自定义。</p>
+</li>
+<li><p>属性动画的监听器。属性动画提供了监听器用于监听动画的播放过程，主要有两个接口AnimatorUpdateListener和AnimatorListener。</p>
+</li>
+<li><p>属性动画生效的两个条件：1、对象必须提供set方法，如果没有初始值，还要提供get方法（如果这条不满足，程序直接crash）；2、对象的set方法对属性的修改必须通过某种方式反映出来，比如UI的改变之类的（如果这条不满足，动画无效果，但不会crash）</p>
+</li>
+<li><p>每一个window都对应一个View和一个ViewRootImpl,window和view是通过ViewRootImpl来建立联系的.windowManager提供的三个接口方法addView、updateViewLayout和removeView都是针对View的，说明View才是Window存在的实体。在实际使用中，无法直接访问window，而是通过windowManager。window的操作是IPC的过程。</p>
+</li>
+<li><p>view是Android中的视图的呈现方式，但是view不能单独存在，他必须依附在Window这个抽象的概念上，因此有视图的地方就有window。</p>
+</li>
+<li><p>普通dialog有一个特殊之处，就是必须采用activity的context，如果采用Application的context，就会报错没有应用token，而应用token一般只有activity拥有。另外，系统window比较特殊，它不需要token。</p>
+</li>
+<li><p>静态注册的广播在应用安装时有系统自动完成注册，具体来说是由PMS（packageManagerService）来完成整个注册过程，除广播外，其他三大组件也都是在应用安装时由PMS解析并注册的。动态注册的过程是从ContextWrapper的registerReceiver方法开始的。</p>
+</li>
+<li><p>广播的发送有几种类型：普通广播，有序广播和粘性广播。</p>
+</li>
+<li><p>ContentProvider的oncreate要先于Application的onCreate而执行。这在四大组件中是少有的现象。ContentProvider提供的增删改查四个接口操作ContentProvider的数据源。这四个方法都是通过Binder来调用的，外界无法直接访问ContentProvider，它只能通过AMS根据Uri来获取对应的ContentProvider的Binder接口IContentProvider，然后通过IContentProvider来访问ContentProvider。</p>
+</li>
+<li><p>一般来说ContentProvider都应该是单例的，它是否单例是由它的android:multiprocess属性来决定的。当这个属性是false时，ContentProvider是单例，当属性为true时，ContentProvider是多实例的。每个调用者的进程中都会存在一个ContentProvider对象。</p>
+</li>
+<li><p>Android的消息机制主要是指Handler的运行机制，Handler的运行需要底层的MessageQueue和Looper的支撑。MessageQueue虽然名为队列，但是内部确实采用单链表的数据结构来存储消息列表。Looper中还有一个特殊的概念，就是ThreadLocal。ThreadLocal并不是线程，它的作用是可以在每个线程中存储数据。Handler创建的时候会采用当前线程的Looper来构造消息循环系统，那么Handler可以通过ThreadLocal可以获取到每个线程的Looper。当然需要注意的是 <em>线程是默认没有Looper的，如果需要使用Handler就必须为线程创建Looper。</em>UI线程，也就是ActivityThread被创建时会初始化Looper，这也是主线程中默认可以使用Handler的原因。</p>
+</li>
+<li><p>系统不允许子线程访问UI的原因在于：Android的UI控件不是线程安全的，如果在多线程中并发访问可能导致UI控件处于不可预期的状态。那么不给UI控件加锁来保证线程安全的原因，也有一些，主要缺点如下：首先加锁机制会让UI访问的逻辑变得复杂；其次，加锁会降低UI访问的效率，因为锁会阻塞线程的执行。由此对比，使用handler更加的简单高效。</p>
+</li>
+<li><p>ThreadLocal是一个线程内部的数据存储类，通过它可以在指定的线程中存储数据。</p>
+</li>
+<li><p>线程池的有点：1）重用线程池中的线程，避免因为线程的创建和销毁带来的性能损耗；2）能有效控制线程池的最大并发数，避免大量的线程之间因为互相抢占系统资源而导致的阻塞现象。3）对线程进行简单的管理，并提供定时执行以及制定间隔循环执行等功能。</p>
+</li>
+<li><p>CrashHandler来监视应用的crash信息。</p>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/技术笔记/" rel="tag"># 技术笔记</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/05/08/test/" rel="next" title="test">
+                <i class="fa fa-chevron-left"></i> test
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/19/代码整洁之道笔记/" rel="prev" title="代码整洁之道笔记">
+                代码整洁之道笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+      
+<div>    
+ 
+ 
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+      <strong>本文作者：</strong>yang
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="/2019/06/19/android开发艺术探索笔记/" title="android开发艺术探索笔记">2019/06/19/android开发艺术探索笔记/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权： </strong>
+    本站文章均采用 <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0 CN</a> 许可协议，请勿用于商业，转载注明出处！
+  </li>
+</ul>
+
+</div>
+
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/avatar.png" alt="yang">
+            
+              <p class="site-author-name" itemprop="name">yang</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/Fyyvictory" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:1174112315@qq.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.zhihu.com/people/yang-bao-bao-20-89" target="_blank" title="知乎">
+                      
+                        <i class="fa fa-fw fa-globe"></i>知乎</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">yang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://yang.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://yoursite.com/2019/06/19/android开发艺术探索笔记/';
+          this.page.identifier = '2019/06/19/android开发艺术探索笔记/';
+          this.page.title = 'android开发艺术探索笔记';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://yang.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("", "");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
